@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Đăng Ảnh Nhóm</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --g50:#e8f8f0;--g100:#c0ead6;--g300:#5dcaa5;--g400:#2ecc71;--g600:#27ae60;--g800:#1a6e40;
+  --pink:#ff6b9d;--pink-bg:#fff0f6;--pink-dark:#c2366e;
+  --bg:#d4f5e2;--card:#fff;--text:#1a2e22;--muted:#5a7a68;
+  --r:16px;
+}
+body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color:var(--text);padding-bottom:80px}
+
+/* HEADER */
+.header{
+  background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);
+  padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1.5px solid var(--g100);position:sticky;top:0;z-index:50;
+}
+.logo{font-family:'Baloo 2',cursive;font-size:18px;font-weight:800;color:var(--g600)}
+.logo small{display:block;font-size:11px;font-weight:500;color:var(--muted);font-family:'Nunito',sans-serif}
+
+/* SCREEN SYSTEM */
+.screen{display:none;padding:16px}
+.screen.active{display:block}
+
+/* ── SCREEN 1: CHỌN NHÓM ── */
+.page-title{
+  font-family:'Baloo 2',cursive;font-size:22px;font-weight:800;
+  color:var(--g800);text-align:center;margin-bottom:6px;
+}
+.page-sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:20px}
+
+.group-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.group-card{
+  background:var(--card);border-radius:var(--r);
+  padding:20px 14px;text-align:center;
+  border:2px solid var(--g100);cursor:pointer;
+  transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,0.06);
+}
+.group-card:active{transform:scale(0.96)}
+.group-card:hover{border-color:var(--g400);background:var(--g50)}
+.group-icon{font-size:32px;margin-bottom:8px}
+.group-name{font-family:'Baloo 2',cursive;font-size:16px;font-weight:700;color:var(--g600)}
+.group-count{font-size:12px;color:var(--muted);margin-top:3px}
+
+/* ── SCREEN 2: XEM + ĐĂNG ẢNH ── */
+.back-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.8);border:1.5px solid var(--g100);
+  border-radius:30px;padding:8px 14px;font-size:13px;font-weight:700;
+  color:var(--g600);cursor:pointer;margin-bottom:16px;
+}
+
+.post-bar{
+  background:var(--card);border-radius:var(--r);
+  padding:14px;margin-bottom:16px;
+  border:1.5px solid var(--g100);
+  box-shadow:0 2px 10px rgba(0,0,0,0.06);
+}
+.post-bar h3{font-family:'Baloo 2',cursive;font-size:16px;color:var(--g600);margin-bottom:10px}
+.field{margin-bottom:8px}
+.field label{font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px}
+.field input,.field textarea{
+  width:100%;border:1.5px solid var(--g100);border-radius:10px;
+  padding:9px 12px;font-size:14px;font-family:'Nunito',sans-serif;
+  outline:none;transition:.2s;background:#fafff9;
+}
+.field input:focus,.field textarea:focus{border-color:var(--g400);background:#fff}
+.field textarea{resize:vertical;min-height:56px}
+
+.photo-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.photo-btn{
+  border:2px dashed var(--g400);border-radius:12px;
+  padding:14px 8px;text-align:center;cursor:pointer;
+  background:var(--g50);color:var(--g800);font-size:13px;font-weight:700;
+  transition:.2s;display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.photo-btn:active{background:var(--g100)}
+.photo-btn .ico{font-size:28px}
+.photo-btn input{display:none}
+
+.preview-box{
+  width:100%;border-radius:12px;max-height:240px;
+  object-fit:cover;display:none;margin-bottom:8px;
+  border:2px solid var(--g100);
+}
+
+.btn-post-main{
+  width:100%;background:var(--g600);color:#fff;border:none;
+  border-radius:12px;padding:14px;font-size:16px;font-weight:800;
+  font-family:'Baloo 2',cursive;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:.2s;box-shadow:0 4px 12px rgba(39,174,96,0.35);
+}
+.btn-post-main:active{transform:scale(0.98)}
+.btn-post-main:disabled{background:#a0cdb0;box-shadow:none}
+
+/* CARDS */
+.cards-list{display:flex;flex-direction:column;gap:14px}
+.card{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);border:1px solid rgba(0,0,0,0.05)}
+.card img{width:100%;max-height:300px;object-fit:cover;display:block}
+.card-body{padding:12px 14px 8px}
+.card-meta{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--g100);display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;color:var(--g800);flex-shrink:0;
+}
+.card-author{font-size:13px;font-weight:700;color:var(--text)}
+.card-time{font-size:11px;color:var(--muted)}
+.card-caption{font-size:14px;color:var(--text);margin-bottom:10px;line-height:1.5}
+
+/* ACTIONS */
+.card-actions{display:flex;gap:0;border-top:1px solid #f0f0f0;margin:0 -14px}
+.act-btn{
+  flex:1;background:none;border:none;padding:10px 8px;
+  font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;
+  color:var(--muted);cursor:pointer;display:flex;align-items:center;
+  justify-content:center;gap:5px;transition:.2s;border-right:1px solid #f0f0f0;
+}
+.act-btn:last-child{border-right:none}
+.act-btn:active{background:var(--g50)}
+.act-btn.liked{color:var(--pink)}
+.heart-ico{font-size:18px;transition:.2s}
+.act-btn.liked .heart-ico{animation:pop .3s ease}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.5)}100%{transform:scale(1)}}
+
+/* COMMENTS */
+.comments-section{padding:0 14px 12px;border-top:1px solid #f5f5f5}
+.comment-item{display:flex;gap:8px;margin-top:10px}
+.cm-avatar{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--g50);display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:var(--g600);flex-shrink:0;margin-top:2px;
+}
+.cm-bubble{background:#f7faf8;border-radius:0 10px 10px 10px;padding:7px 10px;flex:1}
+.cm-author{font-size:12px;font-weight:700;color:var(--g600)}
+.cm-text{font-size:13px;color:var(--text);margin-top:1px}
+
+.cm-form{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.cm-form input{
+  border:1.5px solid var(--g100);border-radius:10px;
+  padding:8px 12px;font-size:13px;font-family:'Nunito',sans-serif;
+  outline:none;transition:.2s;background:#fafff9;
+}
+.cm-form input:focus{border-color:var(--g400)}
+.cm-form-row{display:flex;gap:6px}
+.cm-form-row input{flex:1}
+.btn-cm-send{
+  background:var(--g600);color:#fff;border:none;
+  border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;
+  cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap;transition:.15s;
+}
+.btn-cm-send:active{background:var(--g800)}
+
+/* LOADING */
+.loading{text-align:center;padding:30px;color:var(--muted)}
+.spinner{
+  width:36px;height:36px;border:3px solid var(--g100);
+  border-top-color:var(--g400);border-radius:50%;
+  animation:spin 0.8s linear infinite;margin:0 auto 10px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:#1a2e22;color:#fff;padding:10px 20px;border-radius:30px;
+  font-size:13px;font-weight:700;z-index:999;transition:.3s;white-space:nowrap;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* NO FIREBASE setup */
+.connect-box{
+  background:var(--card);border-radius:var(--r);padding:20px;
+  border:1.5px solid var(--g100);margin-bottom:16px;
+}
+.connect-box h3{font-family:'Baloo 2',cursive;font-size:16px;color:var(--g600);margin-bottom:10px}
+.connect-box input{
+  width:100%;border:1.5px solid var(--g100);border-radius:10px;
+  padding:9px 12px;font-size:13px;font-family:'Nunito',sans-serif;
+  outline:none;margin-bottom:8px;background:#fafff9;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="logo" id="header-title">🌿 Bảng Ảnh Nhóm</div>
+    <small class="logo" style="font-size:11px;color:var(--muted);font-weight:500">Chọn nhóm của bạn để đăng ảnh</small>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- SCREEN 1: Chọn nhóm -->
+<div class="screen active" id="screen-groups">
+  <div class="loading" id="loading-groups">
+    <div class="spinner"></div>
+    Đang tải danh sách nhóm...
+  </div>
+  <div id="groups-content" style="display:none">
+    <div class="page-title" id="s1-title">Chọn nhóm của bạn</div>
+    <div class="page-sub">Bấm vào nhóm để xem và đăng ảnh</div>
+    <div class="group-grid" id="group-grid"></div>
+  </div>
+  <!-- Fallback: nhập Firebase config nếu URL không có params -->
+  <div id="connect-fallback" style="display:none">
+    <div class="page-title">🔌 Nhập thông tin kết nối</div>
+    <div class="page-sub" style="margin-bottom:16px">Giáo viên cần chia sẻ link QR cho bạn</div>
+    <div class="connect-box">
+      <h3>Hoặc nhập thủ công:</h3>
+      <input id="s-db" placeholder="Database URL (https://xxx.firebaseio.com)">
+      <input id="s-pid" placeholder="Project ID">
+      <input id="s-key" placeholder="API Key">
+      <input id="s-auth" placeholder="Auth Domain">
+      <button onclick="manualConnect()" style="width:100%;background:var(--g600);color:#fff;border:none;border-radius:10px;padding:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">Kết nối</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2: Xem nhóm + đăng ảnh -->
+<div class="screen" id="screen-group">
+  <button class="back-btn" onclick="goBack()">← Quay lại</button>
+
+  <!-- Form đăng ảnh -->
+  <div class="post-bar">
+    <h3>📸 Đăng ảnh của bạn</h3>
+    <div class="field"><label>👤 Tên của bạn *</label><input id="post-author" placeholder="Nhập tên..."></div>
+    <div class="field"><label>📝 Chú thích (tuỳ chọn)</label><textarea id="post-caption" placeholder="Mô tả ngắn về ảnh..." rows="2"></textarea></div>
+    <div class="photo-btns">
+      <label class="photo-btn">
+        <span class="ico">📷</span> Chụp ảnh
+        <input type="file" accept="image/*" capture="environment" onchange="selectPhoto(this)">
+      </label>
+      <label class="photo-btn">
+        <span class="ico">🖼️</span> Chọn ảnh
+        <input type="file" accept="image/*" onchange="selectPhoto(this)">
+      </label>
+    </div>
+    <img class="preview-box" id="post-preview" alt="preview">
+    <button class="btn-post-main" id="btn-post" onclick="postCard()" disabled>
+      📤 Đăng ảnh lên nhóm
+    </button>
+  </div>
+
+  <!-- Danh sách ảnh -->
+  <div class="loading" id="loading-cards" style="display:none">
+    <div class="spinner"></div>
+    Đang tải ảnh...
+  </div>
+  <div class="cards-list" id="cards-list"></div>
+</div>
+
+<script type="module">
+import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, onValue, push, update, set } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+let db = null;
+let currentGroupId = null;
+let currentGroupName = '';
+let boardData = {};
+let selectedImageData = null;
+let cardsListener = null;
+let isDemo = false;
+
+// ── INIT ─────────────────────────────────────────────────────────
+const params = new URLSearchParams(location.search);
+const dbUrl = params.get('db');
+const pid = params.get('pid');
+const key = params.get('key');
+const auth = params.get('auth');
+const demo = params.get('demo');
+
+if (demo) {
+  initDemo();
+} else if (dbUrl && pid && key && auth) {
+  connectFirebase({ databaseURL: dbUrl, projectId: pid, apiKey: key, authDomain: auth });
+} else {
+  const saved = localStorage.getItem('fb_config');
+  if (saved) {
+    connectFirebase(JSON.parse(saved));
+  } else {
+    document.getElementById('loading-groups').style.display = 'none';
+    document.getElementById('connect-fallback').style.display = 'block';
+  }
+}
+
+function connectFirebase(cfg) {
+  try {
+    const app = getApps().length ? getApps()[0] : initializeApp(cfg);
+    db = getDatabase(app);
+    loadBoard();
+  } catch(e) {
+    showToast('❌ Lỗi kết nối Firebase');
+    document.getElementById('loading-groups').style.display = 'none';
+    document.getElementById('connect-fallback').style.display = 'block';
+  }
+}
+
+window.manualConnect = function() {
+  const cfg = {
+    databaseURL: document.getElementById('s-db').value.trim(),
+    projectId: document.getElementById('s-pid').value.trim(),
+    apiKey: document.getElementById('s-key').value.trim(),
+    authDomain: document.getElementById('s-auth').value.trim(),
+  };
+  if (!cfg.databaseURL || !cfg.apiKey) { showToast('Vui lòng điền đủ thông tin!'); return; }
+  localStorage.setItem('fb_config', JSON.stringify(cfg));
+  connectFirebase(cfg);
+};
+
+// ── LOAD BOARD ────────────────────────────────────────────────────
+function loadBoard() {
+  onValue(ref(db, 'board'), snap => {
+    boardData = snap.val() || {};
+    document.getElementById('loading-groups').style.display = 'none';
+    document.getElementById('groups-content').style.display = 'block';
+    if (boardData.title) document.getElementById('s1-title').textContent = boardData.title;
+    renderGroups();
+    if (currentGroupId) renderCards();
+  });
+}
+
+function initDemo() {
+  isDemo = true;
+  boardData = {
+    title: 'Demo Board',
+    groups: {
+      g1:{name:'NHÓM 1',order:1,cards:{}},
+      g2:{name:'NHÓM 2',order:2,cards:{}},
+      g3:{name:'NHÓM 3',order:3,cards:{}},
+    }
+  };
+  document.getElementById('loading-groups').style.display = 'none';
+  document.getElementById('groups-content').style.display = 'block';
+  renderGroups();
+}
+
+// ── GROUPS ────────────────────────────────────────────────────────
+function renderGroups() {
+  const groups = boardData.groups || {};
+  const sorted = Object.entries(groups).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
+  const icons = ['🟢','🔵','🟡','🟠','🔴','🟣','⚪','🟤'];
+  document.getElementById('group-grid').innerHTML = sorted.map(([gid, g], i) => {
+    const count = g.cards ? Object.keys(g.cards).length : 0;
+    return `
+    <div class="group-card" onclick="openGroup('${gid}','${g.name}')">
+      <div class="group-icon">${icons[i % icons.length]}</div>
+      <div class="group-name">${g.name}</div>
+      <div class="group-count">${count} ảnh</div>
+    </div>`;
+  }).join('') || '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:20px">Chưa có nhóm nào</div>';
+}
+
+// ── OPEN GROUP ────────────────────────────────────────────────────
+window.openGroup = function(gid, name) {
+  currentGroupId = gid;
+  currentGroupName = name;
+  document.getElementById('screen-groups').classList.remove('active');
+  document.getElementById('screen-group').classList.add('active');
+  document.querySelector('.header .logo').textContent = '🌿 ' + name;
+  renderCards();
+};
+
+window.goBack = function() {
+  currentGroupId = null;
+  document.getElementById('screen-group').classList.remove('active');
+  document.getElementById('screen-groups').classList.add('active');
+  document.querySelector('.header .logo').textContent = '🌿 Bảng Ảnh Nhóm';
+};
+
+// ── RENDER CARDS ──────────────────────────────────────────────────
+function renderCards() {
+  const group = (boardData.groups || {})[currentGroupId];
+  if (!group) return;
+  const cards = group.cards ? Object.entries(group.cards).sort((a,b) => b[1].ts - a[1].ts) : [];
+  const list = document.getElementById('cards-list');
+
+  list.innerHTML = cards.map(([cid, c]) => {
+    const comments = c.comments ? Object.entries(c.comments).sort((a,b)=>a[1].ts-b[1].ts) : [];
+    const initials = (c.author||'A').slice(0,2).toUpperCase();
+    return `
+    <div class="card" id="card-${cid}">
+      ${c.img ? `<img src="${c.img}" alt="ảnh" loading="lazy">` : ''}
+      <div class="card-body">
+        <div class="card-meta">
+          <div class="card-avatar">${initials}</div>
+          <div>
+            <div class="card-author">${c.author||'Ẩn danh'}</div>
+            <div class="card-time">${timeAgo(c.ts)}</div>
+          </div>
+        </div>
+        ${c.caption ? `<div class="card-caption">${c.caption}</div>` : ''}
+        <div class="card-actions">
+          <button class="act-btn" onclick="like('${cid}')">
+            <span class="heart-ico">❤️</span> <span id="lc-${cid}">${c.likes||0}</span>
+          </button>
+          <button class="act-btn" onclick="toggleCm('${cid}')">
+            💬 <span>${comments.length}</span>
+          </button>
+        </div>
+      </div>
+      <div class="comments-section" id="cm-${cid}" style="display:none">
+        <div id="cm-list-${cid}">
+          ${comments.map(([,cm]) => `
+            <div class="comment-item">
+              <div class="cm-avatar">${(cm.author||'A').slice(0,2).toUpperCase()}</div>
+              <div class="cm-bubble">
+                <div class="cm-author">${cm.author||'Ẩn danh'}</div>
+                <div class="cm-text">${cm.text}</div>
+              </div>
+            </div>`).join('')}
+        </div>
+        <div class="cm-form">
+          <input id="cma-${cid}" placeholder="Tên của bạn...">
+          <div class="cm-form-row">
+            <input id="cmt-${cid}" placeholder="Viết bình luận...">
+            <button class="btn-cm-send" onclick="sendComment('${cid}')">Gửi</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('') || '<div style="text-align:center;padding:30px;color:var(--muted)">Chưa có ảnh nào. Hãy đăng ảnh đầu tiên! 📸</div>';
+}
+
+// ── PHOTO UPLOAD ──────────────────────────────────────────────────
+window.selectPhoto = function(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    // Resize image to max 800px width to reduce storage size
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const maxW = 800;
+      const ratio = Math.min(1, maxW / img.width);
+      canvas.width = img.width * ratio;
+      canvas.height = img.height * ratio;
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      selectedImageData = canvas.toDataURL('image/jpeg', 0.82);
+      const prev = document.getElementById('post-preview');
+      prev.src = selectedImageData;
+      prev.style.display = 'block';
+      document.getElementById('btn-post').disabled = false;
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+// ── POST CARD ─────────────────────────────────────────────────────
+window.postCard = async function() {
+  const author = document.getElementById('post-author').value.trim() || 'Ẩn danh';
+  const caption = document.getElementById('post-caption').value.trim();
+  if (!selectedImageData) { showToast('Vui lòng chọn ảnh!'); return; }
+
+  const btn = document.getElementById('btn-post');
+  btn.disabled = true;
+  btn.textContent = '⏳ Đang đăng...';
+
+  const card = { author, caption, img: selectedImageData, likes: 0, comments: {}, ts: Date.now() };
+
+  try {
+    if (isDemo) {
+      const cid = 'c' + Date.now();
+      if (!boardData.groups[currentGroupId].cards) boardData.groups[currentGroupId].cards = {};
+      boardData.groups[currentGroupId].cards[cid] = card;
+      renderGroups(); renderCards();
+    } else {
+      await push(ref(db, `board/groups/${currentGroupId}/cards`), card);
+    }
+    // Reset form
+    document.getElementById('post-author').value = '';
+    document.getElementById('post-caption').value = '';
+    document.getElementById('post-preview').style.display = 'none';
+    document.getElementById('post-preview').src = '';
+    selectedImageData = null;
+    showToast('✅ Đã đăng ảnh thành công!');
+  } catch(e) {
+    showToast('❌ Lỗi: ' + e.message);
+  }
+  btn.textContent = '📤 Đăng ảnh lên nhóm';
+  btn.disabled = false;
+};
+
+// ── LIKE (unlimited) ─────────────────────────────────────────────
+window.like = function(cid) {
+  const path = `board/groups/${currentGroupId}/cards/${cid}/likes`;
+  const current = (boardData.groups[currentGroupId]?.cards?.[cid]?.likes) || 0;
+  const btn = document.getElementById('card-'+cid)?.querySelector('.act-btn');
+
+  if (isDemo) {
+    boardData.groups[currentGroupId].cards[cid].likes = current + 1;
+    document.getElementById('lc-'+cid).textContent = current + 1;
+    if(btn){btn.classList.add('liked');setTimeout(()=>btn.classList.remove('liked'),400)}
+    return;
+  }
+  set(ref(db, path), current + 1);
+  if(btn){btn.classList.add('liked');setTimeout(()=>btn.classList.remove('liked'),400)}
+};
+
+// ── COMMENT ───────────────────────────────────────────────────────
+window.toggleCm = function(cid) {
+  const sec = document.getElementById('cm-'+cid);
+  sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
+  if (sec.style.display === 'block') document.getElementById('cma-'+cid).focus();
+};
+
+window.sendComment = function(cid) {
+  const author = document.getElementById('cma-'+cid).value.trim() || 'Ẩn danh';
+  const text = document.getElementById('cmt-'+cid).value.trim();
+  if (!text) { showToast('Vui lòng nhập bình luận!'); return; }
+  const cm = { author, text, ts: Date.now() };
+  if (isDemo) {
+    if (!boardData.groups[currentGroupId].cards[cid].comments)
+      boardData.groups[currentGroupId].cards[cid].comments = {};
+    boardData.groups[currentGroupId].cards[cid].comments['cm'+Date.now()] = cm;
+    renderCards();
+    setTimeout(()=>{ document.getElementById('cm-'+cid).style.display='block'; },50);
+  } else {
+    push(ref(db, `board/groups/${currentGroupId}/cards/${cid}/comments`), cm);
+    document.getElementById('cmt-'+cid).value = '';
+    showToast('💬 Đã gửi bình luận!');
+  }
+};
+
+// ── UTILS ─────────────────────────────────────────────────────────
+function timeAgo(ts) {
+  if (!ts) return '';
+  const d = Date.now() - ts;
+  if (d < 60000) return 'vừa xong';
+  if (d < 3600000) return Math.floor(d/60000) + ' phút trước';
+  return Math.floor(d/3600000) + ' giờ trước';
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+window.showToast = showToast;
+</script>
+</body>
+</html>
