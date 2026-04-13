@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Đăng Ảnh Nhóm</title>
+<title>3.2 HỌC TỐT, VUI NHỘN</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -15,32 +15,25 @@
 }
 body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color:var(--text);padding-bottom:80px}
 
-/* HEADER */
 .header{
   background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);
-  padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;display:flex;align-items:center;
   border-bottom:1.5px solid var(--g100);position:sticky;top:0;z-index:50;
 }
 .logo{font-family:'Baloo 2',cursive;font-size:18px;font-weight:800;color:var(--g600)}
 .logo small{display:block;font-size:11px;font-weight:500;color:var(--muted);font-family:'Nunito',sans-serif}
 
-/* SCREEN SYSTEM */
 .screen{display:none;padding:16px}
 .screen.active{display:block}
 
-/* ── SCREEN 1: CHỌN NHÓM ── */
-.page-title{
-  font-family:'Baloo 2',cursive;font-size:22px;font-weight:800;
-  color:var(--g800);text-align:center;margin-bottom:6px;
-}
+.page-title{font-family:'Baloo 2',cursive;font-size:22px;font-weight:800;color:var(--g800);text-align:center;margin-bottom:6px}
 .page-sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:20px}
 
 .group-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .group-card{
-  background:var(--card);border-radius:var(--r);
-  padding:20px 14px;text-align:center;
-  border:2px solid var(--g100);cursor:pointer;
-  transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,0.06);
+  background:var(--card);border-radius:var(--r);padding:20px 14px;text-align:center;
+  border:2px solid var(--g100);cursor:pointer;transition:all .2s;
+  box-shadow:0 2px 10px rgba(0,0,0,0.06);
 }
 .group-card:active{transform:scale(0.96)}
 .group-card:hover{border-color:var(--g400);background:var(--g50)}
@@ -48,7 +41,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 .group-name{font-family:'Baloo 2',cursive;font-size:16px;font-weight:700;color:var(--g600)}
 .group-count{font-size:12px;color:var(--muted);margin-top:3px}
 
-/* ── SCREEN 2: XEM + ĐĂNG ẢNH ── */
 .back-btn{
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(255,255,255,0.8);border:1.5px solid var(--g100);
@@ -57,10 +49,8 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 }
 
 .post-bar{
-  background:var(--card);border-radius:var(--r);
-  padding:14px;margin-bottom:16px;
-  border:1.5px solid var(--g100);
-  box-shadow:0 2px 10px rgba(0,0,0,0.06);
+  background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:16px;
+  border:1.5px solid var(--g100);box-shadow:0 2px 10px rgba(0,0,0,0.06);
 }
 .post-bar h3{font-family:'Baloo 2',cursive;font-size:16px;color:var(--g600);margin-bottom:10px}
 .field{margin-bottom:8px}
@@ -75,8 +65,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 
 .photo-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .photo-btn{
-  border:2px dashed var(--g400);border-radius:12px;
-  padding:14px 8px;text-align:center;cursor:pointer;
+  border:2px dashed var(--g400);border-radius:12px;padding:14px 8px;text-align:center;cursor:pointer;
   background:var(--g50);color:var(--g800);font-size:13px;font-weight:700;
   transition:.2s;display:flex;flex-direction:column;align-items:center;gap:4px;
 }
@@ -85,11 +74,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 .photo-btn input{display:none}
 
 .preview-box{
-  width:100%;border-radius:12px;max-height:240px;
-  object-fit:cover;display:none;margin-bottom:8px;
-  border:2px solid var(--g100);
+  width:100%;border-radius:12px;max-height:240px;object-fit:cover;
+  display:none;margin-bottom:8px;border:2px solid var(--g100);
 }
-
 .btn-post-main{
   width:100%;background:var(--g600);color:#fff;border:none;
   border-radius:12px;padding:14px;font-size:16px;font-weight:800;
@@ -102,40 +89,55 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 
 /* CARDS */
 .cards-list{display:flex;flex-direction:column;gap:14px}
-.card{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);border:1px solid rgba(0,0,0,0.05)}
-.card img{width:100%;max-height:300px;object-fit:cover;display:block}
+.card{
+  background:var(--card);border-radius:var(--r);overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);border:1px solid rgba(0,0,0,0.05);
+}
+.card-img-wrap{position:relative;cursor:pointer;overflow:hidden}
+.card-img-wrap img{width:100%;max-height:300px;object-fit:cover;display:block;transition:transform .2s}
+.card-img-wrap:hover img{transform:scale(1.02)}
+.card-img-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,0);
+  display:flex;align-items:center;justify-content:center;
+  transition:.2s;
+}
+.card-img-wrap:hover .card-img-overlay{background:rgba(0,0,0,0.15)}
+.zoom-hint{
+  background:rgba(255,255,255,0.9);border-radius:30px;
+  padding:6px 14px;font-size:12px;font-weight:700;color:var(--g800);
+  opacity:0;transform:scale(0.8);transition:.2s;
+}
+.card-img-wrap:hover .zoom-hint{opacity:1;transform:scale(1)}
+
 .card-body{padding:12px 14px 8px}
 .card-meta{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .card-avatar{
-  width:32px;height:32px;border-radius:50%;
-  background:var(--g100);display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;background:var(--g100);
+  display:flex;align-items:center;justify-content:center;
   font-size:13px;font-weight:800;color:var(--g800);flex-shrink:0;
 }
 .card-author{font-size:13px;font-weight:700;color:var(--text)}
 .card-time{font-size:11px;color:var(--muted)}
 .card-caption{font-size:14px;color:var(--text);margin-bottom:10px;line-height:1.5}
 
-/* ACTIONS */
-.card-actions{display:flex;gap:0;border-top:1px solid #f0f0f0;margin:0 -14px}
+.card-actions{display:flex;border-top:1px solid #f0f0f0;margin:0 -14px}
 .act-btn{
-  flex:1;background:none;border:none;padding:10px 8px;
+  flex:1;background:none;border:none;padding:11px 8px;
   font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;
   color:var(--muted);cursor:pointer;display:flex;align-items:center;
-  justify-content:center;gap:5px;transition:.2s;border-right:1px solid #f0f0f0;
+  justify-content:center;gap:5px;transition:.15s;border-right:1px solid #f0f0f0;
 }
 .act-btn:last-child{border-right:none}
 .act-btn:active{background:var(--g50)}
-.act-btn.liked{color:var(--pink)}
-.heart-ico{font-size:18px;transition:.2s}
-.act-btn.liked .heart-ico{animation:pop .3s ease}
-@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.5)}100%{transform:scale(1)}}
+.heart-ico{font-size:18px;display:inline-block}
+.act-btn.popping .heart-ico{animation:pop .35s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.6)}100%{transform:scale(1)}}
 
-/* COMMENTS */
-.comments-section{padding:0 14px 12px;border-top:1px solid #f5f5f5}
+.comments-section{padding:0 14px 12px;border-top:1px solid #f5f5f5;display:none}
 .comment-item{display:flex;gap:8px;margin-top:10px}
 .cm-avatar{
-  width:26px;height:26px;border-radius:50%;
-  background:var(--g50);display:flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:50%;background:var(--g50);
+  display:flex;align-items:center;justify-content:center;
   font-size:11px;font-weight:800;color:var(--g600);flex-shrink:0;margin-top:2px;
 }
 .cm-bubble{background:#f7faf8;border-radius:0 10px 10px 10px;padding:7px 10px;flex:1}
@@ -152,18 +154,17 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 .cm-form-row{display:flex;gap:6px}
 .cm-form-row input{flex:1}
 .btn-cm-send{
-  background:var(--g600);color:#fff;border:none;
-  border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;
-  cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap;transition:.15s;
+  background:var(--g600);color:#fff;border:none;border-radius:10px;
+  padding:8px 14px;font-size:13px;font-weight:700;
+  cursor:pointer;font-family:'Nunito',sans-serif;white-space:nowrap;
 }
 .btn-cm-send:active{background:var(--g800)}
 
 /* LOADING */
 .loading{text-align:center;padding:30px;color:var(--muted)}
 .spinner{
-  width:36px;height:36px;border:3px solid var(--g100);
-  border-top-color:var(--g400);border-radius:50%;
-  animation:spin 0.8s linear infinite;margin:0 auto 10px;
+  width:36px;height:36px;border:3px solid var(--g100);border-top-color:var(--g400);
+  border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -171,20 +172,132 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 .toast{
   position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);
   background:#1a2e22;color:#fff;padding:10px 20px;border-radius:30px;
-  font-size:13px;font-weight:700;z-index:999;transition:.3s;white-space:nowrap;
+  font-size:13px;font-weight:700;z-index:999;transition:.3s;white-space:nowrap;pointer-events:none;
 }
 .toast.show{transform:translateX(-50%) translateY(0)}
 
-/* NO FIREBASE setup */
-.connect-box{
-  background:var(--card);border-radius:var(--r);padding:20px;
-  border:1.5px solid var(--g100);margin-bottom:16px;
-}
+/* CONNECT BOX */
+.connect-box{background:var(--card);border-radius:var(--r);padding:20px;border:1.5px solid var(--g100);margin-bottom:16px}
 .connect-box h3{font-family:'Baloo 2',cursive;font-size:16px;color:var(--g600);margin-bottom:10px}
 .connect-box input{
   width:100%;border:1.5px solid var(--g100);border-radius:10px;
   padding:9px 12px;font-size:13px;font-family:'Nunito',sans-serif;
   outline:none;margin-bottom:8px;background:#fafff9;
+}
+
+/* ── LIGHTBOX ─────────────────────────────────────────────────── */
+.lb-overlay{
+  position:fixed;inset:0;background:rgba(8,18,12,0.92);
+  z-index:500;display:none;flex-direction:column;
+  animation:lbIn .2s ease;
+}
+.lb-overlay.open{display:flex}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+
+.lb-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;flex-shrink:0;
+}
+.lb-title{font-family:'Baloo 2',cursive;font-size:15px;font-weight:800;color:#fff}
+.lb-close{
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
+  border-radius:50%;width:34px;height:34px;color:#fff;font-size:18px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+
+.lb-body{display:flex;flex:1;overflow:hidden;min-height:0}
+
+.lb-img-col{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  padding:12px;min-width:0;
+}
+.lb-img-col img{
+  max-width:100%;max-height:100%;border-radius:12px;
+  object-fit:contain;box-shadow:0 8px 40px rgba(0,0,0,0.6);
+}
+
+.lb-info-col{
+  width:300px;flex-shrink:0;background:rgba(255,255,255,0.05);
+  border-left:1px solid rgba(255,255,255,0.1);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+
+.lb-author{
+  padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,0.1);flex-shrink:0;
+}
+.lb-author-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.lb-av{
+  width:36px;height:36px;border-radius:50%;background:var(--g100);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;color:var(--g800);flex-shrink:0;
+}
+.lb-author-name{font-weight:700;font-size:14px;color:#fff}
+.lb-author-time{font-size:11px;color:rgba(255,255,255,0.5);margin-top:1px}
+.lb-caption-txt{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.5;margin-top:6px}
+
+.lb-stats-row{
+  display:flex;padding:10px 16px;gap:20px;
+  border-bottom:1px solid rgba(255,255,255,0.1);flex-shrink:0;
+}
+.lb-stat{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:#fff}
+.lb-stat small{font-size:11px;color:rgba(255,255,255,0.5);font-weight:400;display:block}
+
+/* Like button inside lightbox */
+.lb-like-btn{
+  background:rgba(255,107,157,0.15);border:1.5px solid rgba(255,107,157,0.4);
+  border-radius:30px;padding:8px 18px;font-size:14px;font-weight:800;
+  color:#ff6b9d;cursor:pointer;font-family:'Nunito',sans-serif;
+  display:flex;align-items:center;gap:6px;transition:.15s;
+  margin:0 16px 10px;flex-shrink:0;
+}
+.lb-like-btn:active{transform:scale(0.96);background:rgba(255,107,157,0.25)}
+.lb-like-ico{font-size:20px;display:inline-block}
+.lb-like-btn.popping .lb-like-ico{animation:pop .35s ease}
+
+.lb-cm-head{
+  padding:8px 16px 4px;font-size:11px;font-weight:800;
+  color:rgba(255,255,255,0.4);letter-spacing:.6px;flex-shrink:0;
+}
+.lb-cm-list{flex:1;overflow-y:auto;padding:0 16px 10px;display:flex;flex-direction:column;gap:8px}
+.lb-cm-list::-webkit-scrollbar{width:3px}
+.lb-cm-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:3px}
+
+.lb-cm-item{display:flex;gap:8px}
+.lb-cm-av{
+  width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:800;color:rgba(255,255,255,0.8);flex-shrink:0;margin-top:2px;
+}
+.lb-cm-bubble{background:rgba(255,255,255,0.07);border-radius:0 10px 10px 10px;padding:7px 10px;flex:1}
+.lb-cm-author{font-size:11px;font-weight:700;color:var(--g300)}
+.lb-cm-text{font-size:13px;color:rgba(255,255,255,0.85);margin-top:2px;line-height:1.4}
+.lb-no-cm{text-align:center;padding:20px 0;font-size:13px;color:rgba(255,255,255,0.35)}
+
+.lb-cm-form{
+  padding:10px 16px 14px;border-top:1px solid rgba(255,255,255,0.1);
+  display:flex;flex-direction:column;gap:6px;flex-shrink:0;
+}
+.lb-cm-form input{
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:10px;padding:8px 12px;font-size:13px;
+  font-family:'Nunito',sans-serif;color:#fff;outline:none;transition:.2s;
+}
+.lb-cm-form input::placeholder{color:rgba(255,255,255,0.35)}
+.lb-cm-form input:focus{border-color:var(--g300);background:rgba(255,255,255,0.12)}
+.lb-cm-row{display:flex;gap:6px}
+.lb-cm-row input{flex:1}
+.lb-cm-send{
+  background:var(--g600);color:#fff;border:none;border-radius:10px;
+  padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;
+  font-family:'Nunito',sans-serif;white-space:nowrap;
+}
+.lb-cm-send:active{background:var(--g800)}
+
+/* Mobile lightbox: stack vertically */
+@media(max-width:640px){
+  .lb-body{flex-direction:column}
+  .lb-img-col{max-height:38vh;padding:8px}
+  .lb-info-col{width:100%;border-left:none;border-top:1px solid rgba(255,255,255,0.1)}
 }
 </style>
 </head>
@@ -192,8 +305,8 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 
 <div class="header">
   <div>
-    <div class="logo" id="header-title">🌿 Bảng Ảnh Nhóm</div>
-    <small class="logo" style="font-size:11px;color:var(--muted);font-weight:500">Chọn nhóm của bạn để đăng ảnh</small>
+    <div class="logo" id="header-title">🌿 3.2 HỌC TỐT, VUI NHỘN</div>
+    <small class="logo" style="font-size:20px;color:var(--muted);font-weight:500">Lý Minh Luân - chủ nhiệm lớp 3.2</small>
   </div>
 </div>
 
@@ -210,7 +323,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
     <div class="page-sub">Bấm vào nhóm để xem và đăng ảnh</div>
     <div class="group-grid" id="group-grid"></div>
   </div>
-  <!-- Fallback: nhập Firebase config nếu URL không có params -->
   <div id="connect-fallback" style="display:none">
     <div class="page-title">🔌 Nhập thông tin kết nối</div>
     <div class="page-sub" style="margin-bottom:16px">Giáo viên cần chia sẻ link QR cho bạn</div>
@@ -228,8 +340,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 <!-- SCREEN 2: Xem nhóm + đăng ảnh -->
 <div class="screen" id="screen-group">
   <button class="back-btn" onclick="goBack()">← Quay lại</button>
-
-  <!-- Form đăng ảnh -->
   <div class="post-bar">
     <h3>📸 Đăng ảnh của bạn</h3>
     <div class="field"><label>👤 Tên của bạn *</label><input id="post-author" placeholder="Nhập tên..."></div>
@@ -249,44 +359,84 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
       📤 Đăng ảnh lên nhóm
     </button>
   </div>
-
-  <!-- Danh sách ảnh -->
-  <div class="loading" id="loading-cards" style="display:none">
-    <div class="spinner"></div>
-    Đang tải ảnh...
-  </div>
+  <div class="loading" id="loading-cards" style="display:none"><div class="spinner"></div>Đang tải ảnh...</div>
   <div class="cards-list" id="cards-list"></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb-overlay" id="lb-overlay">
+  <div class="lb-topbar">
+    <div class="lb-title" id="lb-title">Xem ảnh</div>
+    <button class="lb-close" id="lb-close">✕</button>
+  </div>
+  <div class="lb-body">
+    <div class="lb-img-col">
+      <img id="lb-img" src="" alt="">
+    </div>
+    <div class="lb-info-col">
+      <div class="lb-author">
+        <div class="lb-author-row">
+          <div class="lb-av" id="lb-av"></div>
+          <div>
+            <div class="lb-author-name" id="lb-author-name"></div>
+            <div class="lb-author-time" id="lb-author-time"></div>
+          </div>
+        </div>
+        <div class="lb-caption-txt" id="lb-caption-txt"></div>
+      </div>
+      <div class="lb-stats-row">
+        <div class="lb-stat">
+          <span style="font-size:20px">❤️</span>
+          <div><span id="lb-likes">0</span><small>lượt tym</small></div>
+        </div>
+        <div class="lb-stat">
+          <span style="font-size:20px">💬</span>
+          <div><span id="lb-cm-count">0</span><small>bình luận</small></div>
+        </div>
+      </div>
+      <button class="lb-like-btn" id="lb-like-btn">
+        <span class="lb-like-ico">❤️</span>
+        <span id="lb-like-label">Thả tim</span>
+      </button>
+      <div class="lb-cm-head">BÌNH LUẬN</div>
+      <div class="lb-cm-list" id="lb-cm-list"></div>
+      <div class="lb-cm-form">
+        <input id="lb-cma" placeholder="Tên của bạn...">
+        <div class="lb-cm-row">
+          <input id="lb-cmt" placeholder="Viết bình luận...">
+          <button class="lb-cm-send" id="lb-cm-send">Gửi</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="module">
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getDatabase, ref, onValue, push, update, set } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { getDatabase, ref, onValue, push, set, get } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
 let db = null;
 let currentGroupId = null;
-let currentGroupName = '';
 let boardData = {};
 let selectedImageData = null;
-let cardsListener = null;
 let isDemo = false;
+let lbCardId = null; // which card is open in lightbox
 
-// ── INIT ─────────────────────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────────────
 const params = new URLSearchParams(location.search);
-const dbUrl = params.get('db');
-const pid = params.get('pid');
-const key = params.get('key');
-const auth = params.get('auth');
 const demo = params.get('demo');
 
 if (demo) {
   initDemo();
-} else if (dbUrl && pid && key && auth) {
-  connectFirebase({ databaseURL: dbUrl, projectId: pid, apiKey: key, authDomain: auth });
+} else if (params.get('db') && params.get('key')) {
+  connectFirebase({
+    databaseURL: params.get('db'), projectId: params.get('pid'),
+    apiKey: params.get('key'), authDomain: params.get('auth')
+  });
 } else {
   const saved = localStorage.getItem('fb_config');
-  if (saved) {
-    connectFirebase(JSON.parse(saved));
-  } else {
+  if (saved) connectFirebase(JSON.parse(saved));
+  else {
     document.getElementById('loading-groups').style.display = 'none';
     document.getElementById('connect-fallback').style.display = 'block';
   }
@@ -316,7 +466,7 @@ window.manualConnect = function() {
   connectFirebase(cfg);
 };
 
-// ── LOAD BOARD ────────────────────────────────────────────────────
+// ── BOARD ─────────────────────────────────────────────────────────
 function loadBoard() {
   onValue(ref(db, 'board'), snap => {
     boardData = snap.val() || {};
@@ -324,35 +474,31 @@ function loadBoard() {
     document.getElementById('groups-content').style.display = 'block';
     if (boardData.title) document.getElementById('s1-title').textContent = boardData.title;
     renderGroups();
-    if (currentGroupId) renderCards();
+    // Nếu đang xem nhóm: chỉ update cards KHÔNG re-render toàn bộ
+    if (currentGroupId) updateCardsInPlace();
   });
 }
 
 function initDemo() {
   isDemo = true;
-  boardData = {
-    title: 'Demo Board',
-    groups: {
-      g1:{name:'NHÓM 1',order:1,cards:{}},
-      g2:{name:'NHÓM 2',order:2,cards:{}},
-      g3:{name:'NHÓM 3',order:3,cards:{}},
-    }
-  };
+  boardData = { title:'Demo Board', groups:{
+    g1:{name:'NHÓM 1',order:1,cards:{}},
+    g2:{name:'NHÓM 2',order:2,cards:{}},
+    g3:{name:'NHÓM 3',order:3,cards:{}},
+  }};
   document.getElementById('loading-groups').style.display = 'none';
   document.getElementById('groups-content').style.display = 'block';
   renderGroups();
 }
 
-// ── GROUPS ────────────────────────────────────────────────────────
 function renderGroups() {
   const groups = boardData.groups || {};
-  const sorted = Object.entries(groups).sort((a,b)=>(a[1].order||0)-(b[1].order||0));
+  const sorted = Object.entries(groups).sort((a,b) => (a[1].order||0)-(b[1].order||0));
   const icons = ['🟢','🔵','🟡','🟠','🔴','🟣','⚪','🟤'];
   document.getElementById('group-grid').innerHTML = sorted.map(([gid, g], i) => {
     const count = g.cards ? Object.keys(g.cards).length : 0;
-    return `
-    <div class="group-card" onclick="openGroup('${gid}','${g.name}')">
-      <div class="group-icon">${icons[i % icons.length]}</div>
+    return `<div class="group-card" onclick="openGroup('${gid}','${g.name}')">
+      <div class="group-icon">${icons[i%icons.length]}</div>
       <div class="group-name">${g.name}</div>
       <div class="group-count">${count} ảnh</div>
     </div>`;
@@ -362,72 +508,118 @@ function renderGroups() {
 // ── OPEN GROUP ────────────────────────────────────────────────────
 window.openGroup = function(gid, name) {
   currentGroupId = gid;
-  currentGroupName = name;
   document.getElementById('screen-groups').classList.remove('active');
   document.getElementById('screen-group').classList.add('active');
-  document.querySelector('.header .logo').textContent = '🌿 ' + name;
-  renderCards();
+  document.getElementById('header-title').textContent = '🌿 ' + name;
+  renderCardsFull();
 };
 
 window.goBack = function() {
   currentGroupId = null;
   document.getElementById('screen-group').classList.remove('active');
   document.getElementById('screen-groups').classList.add('active');
-  document.querySelector('.header .logo').textContent = '🌿 Bảng Ảnh Nhóm';
+  document.getElementById('header-title').textContent = '🌿 Bảng Ảnh Nhóm';
 };
 
-// ── RENDER CARDS ──────────────────────────────────────────────────
-function renderCards() {
-  const group = (boardData.groups || {})[currentGroupId];
+// ── RENDER CARDS (full rebuild — only on first open / new card) ───
+function renderCardsFull() {
+  const group = (boardData.groups||{})[currentGroupId];
   if (!group) return;
-  const cards = group.cards ? Object.entries(group.cards).sort((a,b) => b[1].ts - a[1].ts) : [];
+  const cards = group.cards ? Object.entries(group.cards).sort((a,b)=>b[1].ts-a[1].ts) : [];
+  document.getElementById('cards-list').innerHTML = cards.map(([cid,c]) => cardHTML(cid,c)).join('')
+    || '<div style="text-align:center;padding:30px;color:var(--muted)">Chưa có ảnh nào. Hãy đăng ảnh đầu tiên! 📸</div>';
+}
+
+function cardHTML(cid, c) {
+  const initials = (c.author||'A').slice(0,2).toUpperCase();
+  const comments = c.comments ? Object.entries(c.comments).sort((a,b)=>a[1].ts-b[1].ts) : [];
+  return `
+  <div class="card" id="card-${cid}">
+    ${c.img ? `<div class="card-img-wrap" onclick="openLightbox('${cid}')">
+      <img src="${c.img}" alt="ảnh" loading="lazy">
+      <div class="card-img-overlay"><div class="zoom-hint">🔍 Xem phóng to</div></div>
+    </div>` : ''}
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="card-avatar">${initials}</div>
+        <div>
+          <div class="card-author">${c.author||'Ẩn danh'}</div>
+          <div class="card-time">${timeAgo(c.ts)}</div>
+        </div>
+      </div>
+      ${c.caption ? `<div class="card-caption">${c.caption}</div>` : ''}
+      <div class="card-actions">
+        <button class="act-btn" id="like-btn-${cid}" onclick="like('${cid}')">
+          <span class="heart-ico">❤️</span>
+          <span id="lc-${cid}">${c.likes||0}</span>
+        </button>
+        <button class="act-btn" onclick="toggleCm('${cid}')">
+          💬 <span id="cc-${cid}">${comments.length}</span>
+        </button>
+        <button class="act-btn" onclick="openLightbox('${cid}')">🔍 Xem</button>
+      </div>
+    </div>
+    <div class="comments-section" id="cm-${cid}">
+      <div id="cm-list-${cid}">
+        ${comments.map(([,cm]) => `
+          <div class="comment-item">
+            <div class="cm-avatar">${(cm.author||'A').slice(0,2).toUpperCase()}</div>
+            <div class="cm-bubble">
+              <div class="cm-author">${cm.author||'Ẩn danh'}</div>
+              <div class="cm-text">${cm.text}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div class="cm-form">
+        <input id="cma-${cid}" placeholder="Tên của bạn...">
+        <div class="cm-form-row">
+          <input id="cmt-${cid}" placeholder="Viết bình luận...">
+          <button class="btn-cm-send" onclick="sendComment('${cid}')">Gửi</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── UPDATE IN PLACE (sau khi Firebase push — tránh scroll jump) ───
+function updateCardsInPlace() {
+  const group = (boardData.groups||{})[currentGroupId];
+  if (!group) return;
+  const cards = group.cards ? Object.entries(group.cards).sort((a,b)=>b[1].ts-a[1].ts) : [];
   const list = document.getElementById('cards-list');
 
-  list.innerHTML = cards.map(([cid, c]) => {
-    const comments = c.comments ? Object.entries(c.comments).sort((a,b)=>a[1].ts-b[1].ts) : [];
-    const initials = (c.author||'A').slice(0,2).toUpperCase();
-    return `
-    <div class="card" id="card-${cid}">
-      ${c.img ? `<img src="${c.img}" alt="ảnh" loading="lazy">` : ''}
-      <div class="card-body">
-        <div class="card-meta">
-          <div class="card-avatar">${initials}</div>
-          <div>
-            <div class="card-author">${c.author||'Ẩn danh'}</div>
-            <div class="card-time">${timeAgo(c.ts)}</div>
+  cards.forEach(([cid, c]) => {
+    // Update like count nếu element đã tồn tại
+    const lc = document.getElementById('lc-'+cid);
+    if (lc) lc.textContent = c.likes || 0;
+
+    // Update comment count
+    const cc = document.getElementById('cc-'+cid);
+    const cmCount = c.comments ? Object.keys(c.comments).length : 0;
+    if (cc) cc.textContent = cmCount;
+
+    // Update comment list nếu section đang mở
+    const cmSec = document.getElementById('cm-'+cid);
+    if (cmSec && cmSec.style.display !== 'none') {
+      const comments = c.comments ? Object.entries(c.comments).sort((a,b)=>a[1].ts-b[1].ts) : [];
+      document.getElementById('cm-list-'+cid).innerHTML = comments.map(([,cm]) => `
+        <div class="comment-item">
+          <div class="cm-avatar">${(cm.author||'A').slice(0,2).toUpperCase()}</div>
+          <div class="cm-bubble">
+            <div class="cm-author">${cm.author||'Ẩn danh'}</div>
+            <div class="cm-text">${cm.text}</div>
           </div>
-        </div>
-        ${c.caption ? `<div class="card-caption">${c.caption}</div>` : ''}
-        <div class="card-actions">
-          <button class="act-btn" onclick="like('${cid}')">
-            <span class="heart-ico">❤️</span> <span id="lc-${cid}">${c.likes||0}</span>
-          </button>
-          <button class="act-btn" onclick="toggleCm('${cid}')">
-            💬 <span>${comments.length}</span>
-          </button>
-        </div>
-      </div>
-      <div class="comments-section" id="cm-${cid}" style="display:none">
-        <div id="cm-list-${cid}">
-          ${comments.map(([,cm]) => `
-            <div class="comment-item">
-              <div class="cm-avatar">${(cm.author||'A').slice(0,2).toUpperCase()}</div>
-              <div class="cm-bubble">
-                <div class="cm-author">${cm.author||'Ẩn danh'}</div>
-                <div class="cm-text">${cm.text}</div>
-              </div>
-            </div>`).join('')}
-        </div>
-        <div class="cm-form">
-          <input id="cma-${cid}" placeholder="Tên của bạn...">
-          <div class="cm-form-row">
-            <input id="cmt-${cid}" placeholder="Viết bình luận...">
-            <button class="btn-cm-send" onclick="sendComment('${cid}')">Gửi</button>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }).join('') || '<div style="text-align:center;padding:30px;color:var(--muted)">Chưa có ảnh nào. Hãy đăng ảnh đầu tiên! 📸</div>';
+        </div>`).join('');
+    }
+
+    // Nếu card chưa có trong DOM → thêm mới vào đầu
+    if (!document.getElementById('card-'+cid)) {
+      list.insertAdjacentHTML('afterbegin', cardHTML(cid, c));
+    }
+
+    // Update lightbox nếu đang mở đúng card này
+    if (lbCardId === cid) refreshLightboxData(cid, c);
+  });
 }
 
 // ── PHOTO UPLOAD ──────────────────────────────────────────────────
@@ -436,19 +628,15 @@ window.selectPhoto = function(input) {
   if (!file) return;
   const reader = new FileReader();
   reader.onload = e => {
-    // Resize image to max 800px width to reduce storage size
     const img = new Image();
     img.onload = () => {
       const canvas = document.createElement('canvas');
-      const maxW = 800;
-      const ratio = Math.min(1, maxW / img.width);
-      canvas.width = img.width * ratio;
-      canvas.height = img.height * ratio;
+      const ratio = Math.min(1, 800/img.width);
+      canvas.width = img.width*ratio; canvas.height = img.height*ratio;
       canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
       selectedImageData = canvas.toDataURL('image/jpeg', 0.82);
       const prev = document.getElementById('post-preview');
-      prev.src = selectedImageData;
-      prev.style.display = 'block';
+      prev.src = selectedImageData; prev.style.display = 'block';
       document.getElementById('btn-post').disabled = false;
     };
     img.src = e.target.result;
@@ -456,75 +644,83 @@ window.selectPhoto = function(input) {
   reader.readAsDataURL(file);
 };
 
-// ── POST CARD ─────────────────────────────────────────────────────
 window.postCard = async function() {
   const author = document.getElementById('post-author').value.trim() || 'Ẩn danh';
   const caption = document.getElementById('post-caption').value.trim();
   if (!selectedImageData) { showToast('Vui lòng chọn ảnh!'); return; }
-
   const btn = document.getElementById('btn-post');
-  btn.disabled = true;
-  btn.textContent = '⏳ Đang đăng...';
-
-  const card = { author, caption, img: selectedImageData, likes: 0, comments: {}, ts: Date.now() };
-
+  btn.disabled = true; btn.textContent = '⏳ Đang đăng...';
+  const card = { author, caption, img:selectedImageData, likes:0, comments:{}, ts:Date.now() };
   try {
     if (isDemo) {
-      const cid = 'c' + Date.now();
+      const cid = 'c'+Date.now();
       if (!boardData.groups[currentGroupId].cards) boardData.groups[currentGroupId].cards = {};
       boardData.groups[currentGroupId].cards[cid] = card;
-      renderGroups(); renderCards();
+      renderGroups();
+      document.getElementById('cards-list').insertAdjacentHTML('afterbegin', cardHTML(cid, card));
     } else {
       await push(ref(db, `board/groups/${currentGroupId}/cards`), card);
     }
-    // Reset form
     document.getElementById('post-author').value = '';
     document.getElementById('post-caption').value = '';
     document.getElementById('post-preview').style.display = 'none';
     document.getElementById('post-preview').src = '';
     selectedImageData = null;
     showToast('✅ Đã đăng ảnh thành công!');
-  } catch(e) {
-    showToast('❌ Lỗi: ' + e.message);
-  }
+  } catch(e) { showToast('❌ Lỗi: '+e.message); }
   btn.textContent = '📤 Đăng ảnh lên nhóm';
   btn.disabled = false;
 };
 
-// ── LIKE (unlimited) ─────────────────────────────────────────────
+// ── LIKE — chỉ update DOM, không re-render ────────────────────────
 window.like = function(cid) {
-  const path = `board/groups/${currentGroupId}/cards/${cid}/likes`;
-  const current = (boardData.groups[currentGroupId]?.cards?.[cid]?.likes) || 0;
-  const btn = document.getElementById('card-'+cid)?.querySelector('.act-btn');
+  const group = (boardData.groups||{})[currentGroupId];
+  if (!group) return;
+  const current = group.cards?.[cid]?.likes || 0;
+  const newVal = current + 1;
 
-  if (isDemo) {
-    boardData.groups[currentGroupId].cards[cid].likes = current + 1;
-    document.getElementById('lc-'+cid).textContent = current + 1;
-    if(btn){btn.classList.add('liked');setTimeout(()=>btn.classList.remove('liked'),400)}
-    return;
-  }
-  set(ref(db, path), current + 1);
-  if(btn){btn.classList.add('liked');setTimeout(()=>btn.classList.remove('liked'),400)}
+  // Update DOM ngay lập tức
+  const lcEl = document.getElementById('lc-'+cid);
+  if (lcEl) lcEl.textContent = newVal;
+
+  // Animation
+  const btn = document.getElementById('like-btn-'+cid);
+  if (btn) { btn.classList.add('popping'); setTimeout(()=>btn.classList.remove('popping'),400); }
+
+  // Update local data
+  if (group.cards?.[cid]) group.cards[cid].likes = newVal;
+
+  // Ghi Firebase (không trigger re-render vì updateCardsInPlace chỉ patch DOM)
+  if (!isDemo && db) set(ref(db, `board/groups/${currentGroupId}/cards/${cid}/likes`), newVal);
 };
 
 // ── COMMENT ───────────────────────────────────────────────────────
 window.toggleCm = function(cid) {
   const sec = document.getElementById('cm-'+cid);
-  sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
-  if (sec.style.display === 'block') document.getElementById('cma-'+cid).focus();
+  const isOpen = sec.style.display !== 'none';
+  sec.style.display = isOpen ? 'none' : 'block';
+  if (!isOpen) document.getElementById('cma-'+cid)?.focus();
 };
 
 window.sendComment = function(cid) {
   const author = document.getElementById('cma-'+cid).value.trim() || 'Ẩn danh';
   const text = document.getElementById('cmt-'+cid).value.trim();
   if (!text) { showToast('Vui lòng nhập bình luận!'); return; }
-  const cm = { author, text, ts: Date.now() };
+  const cm = { author, text, ts:Date.now() };
   if (isDemo) {
-    if (!boardData.groups[currentGroupId].cards[cid].comments)
-      boardData.groups[currentGroupId].cards[cid].comments = {};
-    boardData.groups[currentGroupId].cards[cid].comments['cm'+Date.now()] = cm;
-    renderCards();
-    setTimeout(()=>{ document.getElementById('cm-'+cid).style.display='block'; },50);
+    const group = boardData.groups[currentGroupId];
+    if (!group.cards[cid].comments) group.cards[cid].comments = {};
+    const key = 'cm'+Date.now();
+    group.cards[cid].comments[key] = cm;
+    const cmList = document.getElementById('cm-list-'+cid);
+    cmList.insertAdjacentHTML('beforeend', `
+      <div class="comment-item">
+        <div class="cm-avatar">${author.slice(0,2).toUpperCase()}</div>
+        <div class="cm-bubble"><div class="cm-author">${author}</div><div class="cm-text">${text}</div></div>
+      </div>`);
+    const cc = document.getElementById('cc-'+cid);
+    if (cc) cc.textContent = Object.keys(group.cards[cid].comments).length;
+    document.getElementById('cmt-'+cid).value = '';
   } else {
     push(ref(db, `board/groups/${currentGroupId}/cards/${cid}/comments`), cm);
     document.getElementById('cmt-'+cid).value = '';
@@ -532,22 +728,124 @@ window.sendComment = function(cid) {
   }
 };
 
+// ── LIGHTBOX ──────────────────────────────────────────────────────
+window.openLightbox = function(cid) {
+  const group = (boardData.groups||{})[currentGroupId];
+  if (!group) return;
+  const c = (group.cards||{})[cid];
+  if (!c) return;
+  lbCardId = cid;
+  populateLightbox(cid, c);
+  document.getElementById('lb-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+
+function populateLightbox(cid, c) {
+  document.getElementById('lb-img').src = c.img || '';
+  document.getElementById('lb-title').textContent = (boardData.groups[currentGroupId]?.name || '') + ' · ' + (c.author||'Ẩn danh');
+  document.getElementById('lb-av').textContent = (c.author||'A').slice(0,2).toUpperCase();
+  document.getElementById('lb-author-name').textContent = c.author || 'Ẩn danh';
+  document.getElementById('lb-author-time').textContent = timeAgo(c.ts);
+  document.getElementById('lb-caption-txt').textContent = c.caption || '';
+  document.getElementById('lb-likes').textContent = c.likes || 0;
+  const comments = c.comments ? Object.entries(c.comments).sort((a,b)=>a[1].ts-b[1].ts) : [];
+  document.getElementById('lb-cm-count').textContent = comments.length;
+  document.getElementById('lb-cm-list').innerHTML = comments.length
+    ? comments.map(([,cm]) => `
+        <div class="lb-cm-item">
+          <div class="lb-cm-av">${(cm.author||'A').slice(0,2).toUpperCase()}</div>
+          <div class="lb-cm-bubble">
+            <div class="lb-cm-author">${cm.author||'Ẩn danh'}</div>
+            <div class="lb-cm-text">${cm.text}</div>
+          </div>
+        </div>`).join('')
+    : '<div class="lb-no-cm">Chưa có bình luận nào</div>';
+  document.getElementById('lb-like-label').textContent = 'Thả tim (' + (c.likes||0) + ')';
+}
+
+function refreshLightboxData(cid, c) {
+  document.getElementById('lb-likes').textContent = c.likes || 0;
+  document.getElementById('lb-like-label').textContent = 'Thả tim (' + (c.likes||0) + ')';
+  const comments = c.comments ? Object.entries(c.comments).sort((a,b)=>a[1].ts-b[1].ts) : [];
+  document.getElementById('lb-cm-count').textContent = comments.length;
+  document.getElementById('lb-cm-list').innerHTML = comments.length
+    ? comments.map(([,cm]) => `
+        <div class="lb-cm-item">
+          <div class="lb-cm-av">${(cm.author||'A').slice(0,2).toUpperCase()}</div>
+          <div class="lb-cm-bubble">
+            <div class="lb-cm-author">${cm.author||'Ẩn danh'}</div>
+            <div class="lb-cm-text">${cm.text}</div>
+          </div>
+        </div>`).join('')
+    : '<div class="lb-no-cm">Chưa có bình luận nào</div>';
+}
+
+function closeLightbox() {
+  document.getElementById('lb-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  lbCardId = null;
+}
+
+document.getElementById('lb-close').onclick = closeLightbox;
+document.getElementById('lb-overlay').onclick = e => { if (e.target === document.getElementById('lb-overlay')) closeLightbox(); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// Like button inside lightbox
+document.getElementById('lb-like-btn').onclick = function() {
+  if (!lbCardId) return;
+  like(lbCardId);
+  this.classList.add('popping');
+  setTimeout(() => this.classList.remove('popping'), 400);
+  const newVal = (boardData.groups?.[currentGroupId]?.cards?.[lbCardId]?.likes) || 0;
+  document.getElementById('lb-likes').textContent = newVal;
+  document.getElementById('lb-like-label').textContent = 'Thả tim (' + newVal + ')';
+};
+
+// Send comment from lightbox
+document.getElementById('lb-cm-send').onclick = function() {
+  if (!lbCardId) return;
+  const author = document.getElementById('lb-cma').value.trim() || 'Ẩn danh';
+  const text = document.getElementById('lb-cmt').value.trim();
+  if (!text) { showToast('Vui lòng nhập bình luận!'); return; }
+  const cm = { author, text, ts:Date.now() };
+  const cmList = document.getElementById('lb-cm-list');
+  const newItem = `<div class="lb-cm-item">
+    <div class="lb-cm-av">${author.slice(0,2).toUpperCase()}</div>
+    <div class="lb-cm-bubble"><div class="lb-cm-author">${author}</div><div class="lb-cm-text">${text}</div></div>
+  </div>`;
+  if (cmList.querySelector('.lb-no-cm')) cmList.innerHTML = newItem;
+  else cmList.insertAdjacentHTML('beforeend', newItem);
+  cmList.scrollTop = cmList.scrollHeight;
+  const cnt = document.getElementById('lb-cm-count');
+  cnt.textContent = parseInt(cnt.textContent||'0') + 1;
+  document.getElementById('lb-cmt').value = '';
+  showToast('💬 Đã gửi!');
+  if (!isDemo && db) {
+    push(ref(db, `board/groups/${currentGroupId}/cards/${lbCardId}/comments`), cm);
+    // Cũng update card trên feed
+    sendComment(lbCardId);
+    document.getElementById('cmt-'+lbCardId) && (document.getElementById('cmt-'+lbCardId).value = '');
+  } else if (isDemo) {
+    const group = boardData.groups[currentGroupId];
+    if (!group.cards[lbCardId].comments) group.cards[lbCardId].comments = {};
+    group.cards[lbCardId].comments['cm'+Date.now()] = cm;
+  }
+};
+
 // ── UTILS ─────────────────────────────────────────────────────────
 function timeAgo(ts) {
   if (!ts) return '';
-  const d = Date.now() - ts;
-  if (d < 60000) return 'vừa xong';
-  if (d < 3600000) return Math.floor(d/60000) + ' phút trước';
-  return Math.floor(d/3600000) + ' giờ trước';
+  const d = Date.now()-ts;
+  if (d<60000) return 'vừa xong';
+  if (d<3600000) return Math.floor(d/60000)+' phút trước';
+  return Math.floor(d/3600000)+' giờ trước';
 }
-
 let toastTimer;
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2500);
 }
 window.showToast = showToast;
 </script>
