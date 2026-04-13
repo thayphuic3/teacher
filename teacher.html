@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bảng Ảnh Nhóm – Giáo Viên</title>
+<title>3.2 HỌC TỐT, VUI NHỘN</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -117,6 +117,103 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 
 .no-firebase{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
 .no-firebase h2{font-family:'Baloo 2',cursive;font-size:22px;color:var(--g600);margin-bottom:8px}
+
+/* CARD clickable */
+.card{cursor:pointer;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.13)}
+
+/* LIGHTBOX */
+.lb-overlay{
+  position:fixed;inset:0;background:rgba(10,20,14,0.88);
+  display:none;z-index:300;
+  animation:fadeIn .2s ease;
+}
+.lb-overlay.open{display:flex}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.lb-inner{
+  display:flex;width:100%;height:100%;
+  flex-direction:row;
+  overflow:hidden;
+}
+
+/* LEFT: ảnh lớn */
+.lb-img-side{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  padding:24px;position:relative;min-width:0;
+}
+.lb-img-side img{
+  max-width:100%;max-height:100%;
+  border-radius:12px;object-fit:contain;
+  box-shadow:0 8px 40px rgba(0,0,0,0.5);
+}
+.lb-author-badge{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:30px;padding:7px 16px;
+  color:#fff;font-size:13px;font-weight:700;white-space:nowrap;
+}
+.lb-close{
+  position:absolute;top:16px;right:16px;
+  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);
+  border-radius:50%;width:36px;height:36px;
+  color:#fff;font-size:20px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:.15s;z-index:10;
+}
+.lb-close:hover{background:rgba(255,255,255,0.3)}
+
+/* RIGHT: info panel */
+.lb-panel{
+  width:320px;flex-shrink:0;
+  background:#fff;display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.lb-panel-head{
+  padding:16px 18px 12px;border-bottom:1px solid #f0f0f0;
+  flex-shrink:0;
+}
+.lb-panel-title{font-family:'Baloo 2',cursive;font-size:17px;font-weight:800;color:var(--g600)}
+.lb-panel-meta{font-size:12px;color:var(--muted);margin-top:2px}
+.lb-caption{font-size:14px;color:var(--text);margin-top:8px;line-height:1.5}
+.lb-stats{
+  display:flex;gap:16px;padding:12px 18px;
+  border-bottom:1px solid #f0f0f0;flex-shrink:0;
+}
+.lb-stat{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--text)}
+.lb-stat .ico{font-size:20px}
+.lb-stat .lbl{font-size:11px;color:var(--muted);font-weight:500;display:block}
+
+.lb-comments-head{
+  padding:10px 18px 6px;font-size:12px;font-weight:800;
+  color:var(--muted);letter-spacing:.5px;flex-shrink:0;
+}
+.lb-comments-list{
+  flex:1;overflow-y:auto;padding:0 18px 12px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.lb-comments-list::-webkit-scrollbar{width:3px}
+.lb-comments-list::-webkit-scrollbar-thumb{background:var(--g100);border-radius:4px}
+
+.lb-cm{display:flex;gap:8px}
+.lb-cm-av{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--g50);display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:var(--g800);flex-shrink:0;margin-top:2px;
+}
+.lb-cm-bubble{background:#f7faf8;border-radius:0 10px 10px 10px;padding:7px 10px;flex:1}
+.lb-cm-author{font-size:12px;font-weight:700;color:var(--g600)}
+.lb-cm-text{font-size:13px;color:var(--text);margin-top:1px;line-height:1.4}
+.lb-cm-time{font-size:10px;color:var(--muted);margin-top:3px}
+.lb-no-comments{text-align:center;padding:20px;color:var(--muted);font-size:13px}
+
+/* mobile lightbox */
+@media(max-width:700px){
+  .lb-inner{flex-direction:column}
+  .lb-img-side{max-height:45vh;padding:12px}
+  .lb-panel{width:100%;flex:1}
+}
 </style>
 </head>
 <body>
@@ -124,7 +221,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 <div class="header">
   <div>
     <div class="logo"><span>🌿</span> <span id="board-title">Bảng Ảnh Nhóm</span></div>
-    <div class="htag">Trang Giáo Viên · Quản lý nhóm & ảnh</div>
+    <div class="htag">Lý Minh Luân - chủ nhiệm lớp 3.2</div>
   </div>
   <div class="hbtns">
     <button class="btn btn-outline btn-sm" onclick="showQR()">📱 Hiển thị QR</button>
@@ -177,6 +274,30 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
     <div class="modal-btns">
       <button class="btn btn-primary" onclick="addGroup()" style="flex:1">Tạo nhóm</button>
       <button class="btn btn-outline" onclick="closeModal('modal-group')">Huỷ</button>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb-overlay" id="lb-overlay" onclick="closeLightboxBg(event)">
+  <div class="lb-inner">
+    <div class="lb-img-side">
+      <button class="lb-close" onclick="closeLightbox()">✕</button>
+      <img id="lb-img" src="" alt="">
+      <div class="lb-author-badge" id="lb-author-badge"></div>
+    </div>
+    <div class="lb-panel">
+      <div class="lb-panel-head">
+        <div class="lb-panel-title" id="lb-group-name"></div>
+        <div class="lb-panel-meta" id="lb-time"></div>
+        <div class="lb-caption" id="lb-caption"></div>
+      </div>
+      <div class="lb-stats">
+        <div class="lb-stat"><span class="ico">❤️</span><div><span id="lb-likes">0</span><span class="lbl">Lượt tym</span></div></div>
+        <div class="lb-stat"><span class="ico">💬</span><div><span id="lb-cm-count">0</span><span class="lbl">Bình luận</span></div></div>
+      </div>
+      <div class="lb-comments-head">BÌNH LUẬN</div>
+      <div class="lb-comments-list" id="lb-cm-list"></div>
     </div>
   </div>
 </div>
@@ -256,7 +377,7 @@ function renderBoard() {
   board.innerHTML = sorted.map(([gid, g]) => {
     const cards = g.cards ? Object.entries(g.cards).sort((a,b) => b[1].ts - a[1].ts) : [];
     const cardsHtml = cards.map(([cid, c]) => `
-      <div class="card">
+      <div class="card" onclick="openLightbox('${gid}','${cid}')">
         ${c.img ? `<img src="${c.img}" alt="ảnh">` : ''}
         <div class="card-info">
           <div class="card-author">👤 ${c.author||'Ẩn danh'}</div>
@@ -347,6 +468,50 @@ window.printQR = function() {
   win.document.write(`<img src="${canvas.toDataURL()}" style="width:300px"><p style="font-size:14px;font-family:sans-serif">Quét để đăng ảnh vào nhóm của bạn</p>`);
   win.print();
 };
+
+// ── LIGHTBOX ──────────────────────────────────────────────────────
+window.openLightbox = function(gid, cid) {
+  const g = boardData.groups[gid];
+  if (!g) return;
+  const c = (g.cards || {})[cid];
+  if (!c) return;
+
+  document.getElementById('lb-img').src = c.img || '';
+  document.getElementById('lb-author-badge').textContent = '👤 ' + (c.author || 'Ẩn danh');
+  document.getElementById('lb-group-name').textContent = g.name;
+  document.getElementById('lb-time').textContent = timeAgo(c.ts);
+  document.getElementById('lb-caption').textContent = c.caption || '';
+  document.getElementById('lb-likes').textContent = c.likes || 0;
+
+  const comments = c.comments ? Object.entries(c.comments).sort((a,b) => a[1].ts - b[1].ts) : [];
+  document.getElementById('lb-cm-count').textContent = comments.length;
+
+  document.getElementById('lb-cm-list').innerHTML = comments.length
+    ? comments.map(([,cm]) => `
+        <div class="lb-cm">
+          <div class="lb-cm-av">${(cm.author||'A').slice(0,2).toUpperCase()}</div>
+          <div class="lb-cm-bubble">
+            <div class="lb-cm-author">${cm.author || 'Ẩn danh'}</div>
+            <div class="lb-cm-text">${cm.text}</div>
+            <div class="lb-cm-time">${timeAgo(cm.ts)}</div>
+          </div>
+        </div>`).join('')
+    : '<div class="lb-no-comments">💬 Chưa có bình luận nào</div>';
+
+  document.getElementById('lb-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeLightbox = function() {
+  document.getElementById('lb-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+};
+
+window.closeLightboxBg = function(e) {
+  if (e.target === document.getElementById('lb-overlay')) closeLightbox();
+};
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 // ── UTILS ─────────────────────────────────────────────────────────
 function timeAgo(ts) {
