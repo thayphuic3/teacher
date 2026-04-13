@@ -24,7 +24,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color
 }
 .logo{font-family:'Baloo 2',cursive;font-size:20px;font-weight:800;color:var(--g600);display:flex;align-items:center;gap:8px}
 .logo span{font-size:24px}
-.htag{font-size:12px;color:var(--muted);margin-top:1px}
+.htag{font-size:20px;color:var(--muted);margin-top:1px}
 .hbtns{display:flex;gap:8px;align-items:center}
 
 .btn{
@@ -311,7 +311,7 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getDatabase, ref, onValue, set, push, remove, update } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
 let db = null;
-let boardData = { title: 'Bảng Ảnh Nhóm', groups: {} };
+let boardData = { title: '3.2 HỌC TỐT, VUI NHỘN', groups: {} };
 let isDemo = false;
 
 // ── FIREBASE CONFIG ──────────────────────────────────────────────
@@ -357,8 +357,8 @@ window.demoMode = function() {
 // ── REALTIME LISTENER ─────────────────────────────────────────────
 function listenBoard() {
   onValue(ref(db, 'board'), snap => {
-    boardData = snap.val() || { title: 'Bảng Ảnh Nhóm', groups: {} };
-    document.getElementById('board-title').textContent = boardData.title || 'Bảng Ảnh Nhóm';
+    boardData = snap.val() || { title: '3.2 HỌC TỐT, VUI NHỘN', groups: {} };
+    document.getElementById('board-title').textContent = boardData.title || '3.2 HỌC TỐT, VUI NHỘN';
     renderBoard();
   });
 }
